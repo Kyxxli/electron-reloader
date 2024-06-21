@@ -1,15 +1,9 @@
 {
 	"name": "electron-reloader",
-	"version": "1.2.3",
+	"version": "1.0.0",
 	"description": "Simple auto-reloading for Electron apps during development",
 	"license": "MIT",
-	"repository": "sindresorhus/electron-reloader",
-	"funding": "https://github.com/sponsors/sindresorhus",
-	"author": {
-		"name": "Sindre Sorhus",
-		"email": "sindresorhus@gmail.com",
-		"url": "https://sindresorhus.com"
-	},
+	"author": "Kyxxli",
 	"scripts": {
 		"test": "xo && tsd",
 		"start": "electron test/main"
