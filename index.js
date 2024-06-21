@@ -7,6 +7,15 @@ const isDev = require('electron-is-dev');
 const dateTime = require('date-time');
 const chalk = require('chalk');
 const findUp = require('find-up');
+const fs = require('fs');
+
+var logDebug;
+var modulePathLocation = path.join('..', '..', 'modules', 'debug.js');
+
+if(fs.existsSync(modulePathLocation))
+{
+	logDebug = require(modulePathLocation);
+}
 
 function getMainProcessPaths(topModuleObject, cwd) {
 	const paths = new Set([topModuleObject.filename]);
@@ -74,13 +83,13 @@ module.exports = (moduleObject, options = {}) => {
 
 	if (options.debug) {
 		watcher.on('ready', () => {
-			console.log('Watched paths:', inspect(watcher.getWatched(), {compact: false, colors: true}));
+			logDebug('Watched paths:' + inspect(watcher.getWatched(), {compact: false, colors: true}), 5);
 		});
 	}
 
 	watcher.on('change', filePath => {
 		if (options.debug) {
-			console.log('File changed:', chalk.bold(filePath), chalk.dim(`(${dateTime().split(' ')[1]})`));
+			logDebug('File changed:' + chalk.bold(filePath), chalk.dim(`(${dateTime().split(' ')[1]})`), 5);
 		}
 
 		if (mainProcessPaths.has(path.join(cwd, filePath))) {
